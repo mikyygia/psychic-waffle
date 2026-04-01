@@ -16,8 +16,6 @@ export default function BannedFilters ({bannedTypes, bannedGens, bannedWeight, u
 
     return (
         <div className="banned-filters">
-            <p>banned filters:</p>
-
             <div>
                 {
                 bannedTypes.map((ban, _) => {

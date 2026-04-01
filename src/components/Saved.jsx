@@ -1,13 +1,20 @@
-export default function Saved () {
+import "../index.css"
+
+export default function Saved ({savedPokemon, renderPokemon}) {
     return (
         <div>
             <hr />
-            
-            <p>saved (fixed values for now):</p>
-            
+
+            <p>saved pokemon:</p>
+
             <ul>
-                <li>pikachu</li>
-                <li>snorlax</li>
+                {
+                    savedPokemon.map((pokemon, index) => {
+                        return (
+                            <li key={index} onClick={() => renderPokemon(pokemon.id)} className="saved-pkm">{pokemon.name}</li>
+                        );
+                    })
+                }
             </ul>
         </div>
     );

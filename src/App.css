@@ -13,6 +13,10 @@ body, h1, p {
     background-color: #FFF7E6;
     color: #2B323F;
     padding: 32px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .display-section {

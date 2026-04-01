@@ -3,7 +3,8 @@ import { useState } from "react";
 import BannedFilters from './components/BannedFilters';
 import Randomize from './components/Randomize'
 import Saved from './components/Saved'
-import ShowPokemon, {getGenId} from './components/ShowPokemon'
+import ShowPokemon from './components/ShowPokemon'
+import {getGenId} from "./utils"
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     const [typeBanList, setTypeBanList] = useState([]);
     const [genBanList, setGenBanList] = useState([]);
     const [weightBanList, setWeightBanList] = useState([]);
+    const [savedPokemon, setNewSavedPokemon] = useState([]);
 
     const getRandomPokemon = async () => {
       const maxAttempts = 50;
@@ -46,6 +48,24 @@ function App() {
       }
     };
 
+    const getPokemon = async (id) => {
+      console.log('wheein');
+
+      try {
+        setLoading(true);
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        const data = await res.json();
+
+        setCurrentPokemon(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+
+      console.log(currentPokemon);
+    }
+
     const onSetTypeBanList = (type) => {
       if (!typeBanList.includes(type)) { // don't add if it already exists
         setTypeBanList([...typeBanList, type]);
@@ -63,35 +83,43 @@ function App() {
         setWeightBanList([...weightBanList, weight]);
       }
     }
-    
+
+    const onSetNewSavedPokemon = (name, id) => {
+      const newSave = { name, id}
+      setNewSavedPokemon([...savedPokemon, newSave]);
+    }
 
   return (
     <div className="container">
       <div className="info-section">
-        <h1>discover your pokemon</h1>
-        <BannedFilters 
-            bannedTypes={typeBanList}
-            bannedGens={genBanList}
-            bannedWeight={weightBanList}
-            // removing filters
-            updateGen={setGenBanList}
-            updateType={setTypeBanList}
-            updateWeight={setWeightBanList}
-        />
+        <div>
+          <h1>discover your pokemon</h1>
+          <p>banned filters:</p>
+
+          <BannedFilters 
+              bannedTypes={typeBanList}
+              bannedGens={genBanList}
+              bannedWeight={weightBanList}
+              // removing filters
+              updateGen={setGenBanList}
+              updateType={setTypeBanList}
+              updateWeight={setWeightBanList}
+          />
+        </div>
+
         <Randomize onFetch={getRandomPokemon}/>
-        {/* <Saved /> */}
+        <Saved 
+          savedPokemon={savedPokemon}
+          renderPokemon={getPokemon}
+        />
       </div>
     
       <div className="display-section">
         <ShowPokemon state={loading} data={currentPokemon} 
-                // banned types
-                banType={onSetTypeBanList}
-
-                // banned generations
-                banGen={onSetGenBanList}
-
-                // banned weight (kg)
-                banWeight={onSetWeightBanList}
+                banType={onSetTypeBanList} // banned types
+                banGen={onSetGenBanList} // banned generations
+                banWeight={onSetWeightBanList} // banned weight (kg)
+                saveNewPokemon={onSetNewSavedPokemon}
         />
       </div>
     </div>

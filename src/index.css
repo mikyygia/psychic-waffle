@@ -83,3 +83,8 @@ h4 span {
     margin-top: 16px;
     display: flex;
 }
+
+.saved-pkm:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

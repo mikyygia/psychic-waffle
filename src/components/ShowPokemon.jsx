@@ -1,15 +1,7 @@
 import "../index.css"
-const gen = [151, 251, 386, 493, 649, 721, 809, 905, 1025];
+import { getGenId } from "../utils.jsx"
 
-export const getGenId = (id) => {
-    for (let i = 0; i < gen.length; i++) {
-        if (id <= gen[i]) {
-            return i + 1;
-        }
-    }
-}
-
-export default function ShowPokemon ({state, data, banType, banGen, banWeight}) {
+export default function ShowPokemon ({state, data, banType, banGen, banWeight, saveNewPokemon}) {
     return (
         <div>
             {
@@ -27,14 +19,14 @@ export default function ShowPokemon ({state, data, banType, banGen, banWeight}) 
                                     } 
                                 alt={data.name} />
                             
-                            {/* <button className="pokemon-save-btn">save</button> wip feature*/}
+                            <button onClick={() => saveNewPokemon(data.name, data.id)} className="pokemon-save-btn">save</button>
                         </div>
 
 
                         <div className="filter-type">
                             <h4>attributes <span>(click to move to ban list):</span></h4>
                             {
-                                data.types.map((t, index) => {
+                                data.types.map((t, _) => {
                                     return (
                                         <button onClick={() => banType(t.type.name)} className="filter-option">{t.type.name}</button>
                                     );
@@ -43,7 +35,8 @@ export default function ShowPokemon ({state, data, banType, banGen, banWeight}) 
 
                             { <button onClick={() => banGen(getGenId(data.id))} className="filter-option">generation {getGenId(data.id)}</button> }
 
-                            { <button onClick={() => banWeight(data.height)}>{data.height} kg</button> }
+                            { <button onClick={() => banWeight(data.weight)}>{data.weight / 10} kg</button> }
+
                         </div>
                     </div>
                 ) : (
