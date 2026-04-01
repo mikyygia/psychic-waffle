@@ -3,7 +3,8 @@ import { useState } from "react";
 import BannedFilters from './components/BannedFilters';
 import Randomize from './components/Randomize'
 import Saved from './components/Saved'
-import ShowPokemon from './components/ShowPokemon'
+import ShowPokemon, {getGenId} from './components/ShowPokemon'
+
 
 function App() {
     const [currentPokemon, setCurrentPokemon] = useState({});
@@ -14,20 +15,36 @@ function App() {
     const [weightBanList, setWeightBanList] = useState([]);
 
     const getRandomPokemon = async () => {
-        const randomId = Math.floor(Math.random() * 1026);
-        const url = `https://pokeapi.co/api/v2/pokemon/${randomId}`;
+      const maxAttempts = 50;
+      setLoading(true);
 
-        try {
-            setLoading(true);
-            const res = await fetch(url);
+      try {
+        for (let i = 0; i < maxAttempts; i++) {
+            const randomId = Math.floor(Math.random() * 1025) + 1;
+            
+            // check for banned gens
+            if (genBanList.includes(getGenId(randomId))) continue;
+
+            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
             const data = await res.json();
+
+            // filter by types & weight
+            const type = data.types.map(t => t.type.name);
+            const weight = data.weight;
+
+            if (typeBanList.some(t => type.includes(t))) continue;
+            if (weightBanList.includes(weight)) continue;
+
             setCurrentPokemon(data);
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false);
-        }
-    }
+            return;
+        };
+
+      } catch (error) {
+          console.log(error);
+      } finally {
+          setLoading(false);
+      }
+    };
 
     const onSetTypeBanList = (type) => {
       if (!typeBanList.includes(type)) { // don't add if it already exists

@@ -1,6 +1,5 @@
 import "../index.css"
 
-
 export default function BannedFilters ({bannedTypes, bannedGens, bannedWeight}) {
     return (
         <div className="banned-filters">
@@ -26,7 +25,7 @@ export default function BannedFilters ({bannedTypes, bannedGens, bannedWeight}) 
                 {
                 bannedWeight.map((weight, _) => {
                     return (
-                        <button>{weight} kg</button>
+                        <button>{weight / 10} kg</button>
                     )
                 })
                 }
