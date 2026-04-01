@@ -46,9 +46,9 @@ Here's a walkthrough of implemented user stories:
 
 <!-- <img src="https://imgur.com/a/dUxyMFl.gif" title="walkthrough" alt="video walkthrough> -->
 
-![Video Walkthrough](https://i.imgur.com/dUxyMFl.gif)
+![Video Walkthrough]([https://i.imgur.com/dUxyMFl.gif](https://imgur.com/a/dUxyMFl.gif))
 
-<img src="./src/assets/screenshots/example1.png" width="250px">
+<img src="./src/assets/screenshots/example1.png">
 
 ## Notes
 
