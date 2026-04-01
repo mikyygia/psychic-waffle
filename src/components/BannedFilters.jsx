@@ -1,6 +1,19 @@
 import "../index.css"
 
-export default function BannedFilters ({bannedTypes, bannedGens, bannedWeight}) {
+export default function BannedFilters ({bannedTypes, bannedGens, bannedWeight, updateGen, updateType, updateWeight}) {
+    const removeBan = (option, value) => {
+        if (option == "gen") {
+            const newGens = bannedGens.filter(g => g !== value);
+            updateGen(newGens);
+        } else if (option == "type") {
+            const newTypes = bannedTypes.filter(t => t !== value);
+            updateType(newTypes);
+        } else { // weight
+            const newWeight = bannedWeight.filter(w => w !== value);
+            updateWeight(newWeight);
+        }
+    }
+
     return (
         <div className="banned-filters">
             <p>banned filters:</p>
@@ -9,7 +22,7 @@ export default function BannedFilters ({bannedTypes, bannedGens, bannedWeight}) 
                 {
                 bannedTypes.map((ban, _) => {
                     return (
-                        <button>{ban} type</button>
+                        <button key={ban} onClick={() => removeBan("type", ban)}>{ban} type</button>
                     )
                 })
                 }
@@ -17,7 +30,7 @@ export default function BannedFilters ({bannedTypes, bannedGens, bannedWeight}) 
                 {
                 bannedGens.map((gen, _) => {
                     return (
-                        <button>generation {gen}</button>
+                        <button key={gen} onClick={() => removeBan("gen", gen)}>generation {gen}</button>
                     )
                 })
                 }
@@ -25,7 +38,7 @@ export default function BannedFilters ({bannedTypes, bannedGens, bannedWeight}) 
                 {
                 bannedWeight.map((weight, _) => {
                     return (
-                        <button>{weight / 10} kg</button>
+                        <button key={weight} onClick={() => removeBan("w", weight)}>{weight / 10} kg</button>
                     )
                 })
                 }

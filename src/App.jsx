@@ -73,6 +73,10 @@ function App() {
             bannedTypes={typeBanList}
             bannedGens={genBanList}
             bannedWeight={weightBanList}
+            // removing filters
+            updateGen={setGenBanList}
+            updateType={setTypeBanList}
+            updateWeight={setWeightBanList}
         />
         <Randomize onFetch={getRandomPokemon}/>
         {/* <Saved /> */}
