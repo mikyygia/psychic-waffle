@@ -1,4 +1,5 @@
 import './App.css'
+import magikarp from "./assets/magikarp.png";
 import { useState } from "react";
 import BannedFilters from './components/BannedFilters';
 import Randomize from './components/Randomize'
@@ -93,6 +94,7 @@ function App() {
     <div className="container">
       <div className="info-section">
         <div>
+          <img src={magikarp} alt="magikarp" style={{width: "50px"}}/>
           <h1>discover your pokemon</h1>
           <p>banned filters:</p>
 

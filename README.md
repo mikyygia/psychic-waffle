@@ -2,9 +2,9 @@
 
 Submitted by: Nhi
 
-This web app: poke-discover
+This web app: pokedex-roulette
 
-Time spent: **X** hours spent in total
+Time spent: **8** hours spent in total
 
 ## Required Features
 
@@ -26,7 +26,7 @@ The following **required** functionality is completed:
 - [x] **Attributes on the ban list prevent further images/API results with that attribute from being displayed**
   - Clicking on the API call button should not result in any image/attributes with attribute values in the ban list being displayed (ex. Using a cat API, if the ban list includes the value 'Siberian' for the breed attribute, clicking on the Discover button should never result in a Siberian cat being displayed)
   - Note: More attribute values on the ban list may result in a higher frequency of repeat results
-  - [ ] _To ensure an accurate grade, your recording **must** show that when clicked, an attribute in the ban list is immediately removed from the list of banned attributes_
+  - [x] _To ensure an accurate grade, your recording **must** show that when clicked, an attribute in the ban list is immediately removed from the list of banned attributes_
 
 The following **optional** features are implemented:
 
@@ -37,30 +37,29 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you added to improve the site's functionality!
+- [x] Save a result and view it later
+  - Instead of storing a history of every seen results, users have the ability to save a pokemon
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<!-- <img src="https://imgur.com/a/dUxyMFl.gif" title="walkthrough" alt="video walkthrough> -->
 
-<!-- Replace this with whatever GIF tool you used! -->
+![Video Walkthrough](https://i.imgur.com/dUxyMFl.gif)
 
-GIF created with ...
-
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+<img src="./src/assets/screenshots/example1.png" width="250px">
 
 ## Notes
 
 Describe any challenges encountered while building the app.
 
+- I used PokeAPI which currently does not have querying abilities so I had to manually filter them which got a bit confusing.
+- Web not rendering and not sure what was wrong. This was mostly the result of using a .map incorrectly to display data.
+
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright 2026 Nhi
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
